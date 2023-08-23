@@ -6,6 +6,14 @@ import { transactionsRoutes } from './routes/transactions';
 const app = fastify();
 
 app.register(cookie);
+
+/**
+ * Aula 18 - Configurando um hook global
+ */
+// app.addHook('preHandler', async (req, res) => {
+//   console.log('Testes');
+// });
+
 app.register(transactionsRoutes, {
   prefix: 'transactions',
 });
