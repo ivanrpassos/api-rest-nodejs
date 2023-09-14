@@ -8,6 +8,7 @@ import {
 import { app } from '../src/app';
 
 import request from 'supertest';
+import { execSync } from 'child_process';
 
 describe('Transactions routes', () => {
   beforeAll(async () => {
@@ -16,6 +17,11 @@ describe('Transactions routes', () => {
 
   afterAll(async () => {
     await app.close();
+  });
+
+  beforeAll(() => {
+    execSync('npm run knex migrate:rollback --all');
+    execSync('npm run knex migrate:latest');
   });
 
   it('Should be able to create a new transaction', async () => {
